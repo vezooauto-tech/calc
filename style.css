@@ -155,40 +155,39 @@ button:active{ transform: translateY(1px); }
   margin: 0;              /* сброс дефолтных отступов */
   accent-color: var(--blue); /* цвет галочки в современных браузерах */
 }
-/* 1. Контейнер валют – ровный ряд */
+/* 1. Ряд компактных окошек */
 .rates-inline {
   display: flex;
-  gap: 16px;               /* зазор между окошками */
+  gap: 12px;
   justify-content: center;
-  flex-wrap: wrap;         /* перенос на маленьких экранах */
+  flex-wrap: wrap;
 }
 
-/* 2. Одно окошко */
+/* 2. Одно окошко – минималистичное */
 .rates-inline .rate {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
   background: #fff;
   border: 1px solid #d1d5db;
-  border-radius: 8px;
-  padding: 12px 16px 14px;
-  min-width: 130px;        /* не сжимается меньше */
-  box-shadow: 0 2px 6px rgba(0,0,0,.04);
+  border-radius: 6px;
+  padding: 8px 12px 9px;
+  min-width: 110px;        /* чуть уже */
+  box-shadow: 0 1px 3px rgba(0,0,0,.04);
 }
 
-/* 3. Подпись валюты – мелкая, но читаемая */
+/* 3. Подпись – мелкая, но читаемая */
 .rates-inline .rate label {
-  font-size: 13px;
+  font-size: 12px;
   color: #6b7280;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
-/* 4. Поле ввода – без рамки, на всю ширину окошка */
+/* 4. Поле ввода – компактное */
 .rates-inline .rate input {
   width: 100%;
-  height: 36px;
-  padding: 0 8px;
-  font-size: 16px;
+  height: 28px;              /* ↓ высота */
+  padding: 0 6px;
+  font-size: 15px;
   font-weight: 600;
   border: none;
   background: transparent;
@@ -196,7 +195,7 @@ button:active{ transform: translateY(1px); }
   color: #111;
 }
 
-/* 5. Акцент при фокусе – только нижняя полоса */
+/* 5. Акцент при фокусе – тонкая синяя полоса */
 .rates-inline .rate input:focus {
-  box-shadow: inset 0 -2px 0 var(--blue);
+  box-shadow: inset 0 -1px 0 var(--blue);
 }

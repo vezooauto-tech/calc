@@ -196,3 +196,11 @@ btnSend.addEventListener("click", async () => {
 
 // --- Инициализация ---
 setCountry("china");
+// === Плавный скролл к результатам ТОЛЬКО после клика на "Рассчитать" ===
+btnCalc.addEventListener('click', () => {
+  // ждём 100 мс, чтобы браузер успел отрисовать новые данные
+  setTimeout(() => {
+    const block = document.getElementById('results');
+    if (block) block.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
+}, { once: false });   // false = не удаляем старый обработчик, просто добавляем ещё один

@@ -141,3 +141,17 @@ button:active{ transform: translateY(1px); }
   .two-cols, .small-outputs{ flex-direction: column; }
   .actions{ flex-direction: column; }
 }
+
+/* --------- чекбокс «Применить льготу» --------- */
+.checkbox {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;               /* небольшой зазор между квадратиком и текстом */
+}
+
+.checkbox input[type="checkbox"] {
+  width: 16px;            /* стандартный размер */
+  height: 16px;
+  margin: 0;              /* сброс дефолтных отступов */
+  accent-color: var(--blue); /* цвет галочки в современных браузерах */
+}

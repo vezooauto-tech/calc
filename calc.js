@@ -153,7 +153,7 @@ btnCalc.addEventListener("click", () => {
   outSVHUSD.textContent = fmt(svh);
   outBrokerUSD.textContent = fmt(broker);
   outFullUSD.textContent = fmt(fullCost);
-});
+  document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
 
 // --- Очистка ---
 btnClear.addEventListener("click", () => {

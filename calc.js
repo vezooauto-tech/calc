@@ -161,6 +161,43 @@ btnClear.addEventListener("click", () => {
   outDate.textContent = "—";
   document.querySelectorAll("#results div[id^='out']").forEach(el => el.textContent = "0.00 $");
 });
+// ============= Отправка в Telegram =============
+btnSend.addEventListener("click", async () => {
+  const token  = '7711504618:AAFIMzbrwJfV4If7os9bT671uuV1O-s25mg';
+  const chatId = '-1002840988847';
+
+  // Формируем красивое сообщение
+  const text = `
+📊 <b>Новый расчёт ${currentCountry.toUpperCase()}</b>
+├ Марка / модель:  <b>${brandModel.value || "—"}</b>
+├ Цена клиента:    <b>${outFullUSD.textContent}</b>
+├ Маржа:           <b>${outMargin.textContent}</b>
+├ Пробег:          <i>${mileageInput.value || "—"} км</i>
+└ Ссылка: ${linkInput.value || "—"}
+  `.trim();
+
+  try {
+    const res = await fetch(
+      `https://api.telegram.org/bot${token}/sendMessage`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: text,
+          parse_mode: "HTML",
+          disable_web_page_preview: true,
+        }),
+      }
+    );
+
+    if (!res.ok) throw new Error(res.statusText);
+    alert("✅ Отправлено в Telegram-канал!");
+  } catch (e) {
+    console.error(e);
+    alert("❌ Ошибка отправки в Telegram");
+  }
+});
 // --- Инициализация ---
 setCountry("china");
 // === Плавный скролл к результатам ТОЛЬКО после клика на "Рассчитать" ===

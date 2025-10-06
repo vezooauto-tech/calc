@@ -204,3 +204,10 @@ btnCalc.addEventListener('click', () => {
     if (block) block.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, 100);
 }, { once: false });   // false = не удаляем старый обработчик, просто добавляем ещё один
+// мгновенный пересчёт маржи при изменении поля "Цена для клиента"
+clientPriceInput.addEventListener('input', () => {
+  const clientPrice = parseFloat(clientPriceInput.value) || 0;
+  const totalNoMarginRaw = parseFloat(outTotalNoMargin.textContent.replace(/[^0-9.]/g, "")) || 0;
+  const margin = clientPrice - totalNoMarginRaw;
+  outMargin.textContent = fmt(margin);
+});

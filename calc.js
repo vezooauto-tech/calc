@@ -243,19 +243,3 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
-// ========== авто-подтяжка курсов с open.er-api.com ==========
-async function loadRates() {
-  try {
-    const { rates } = await fetch('https://open.er-api.com/v6/latest/USD')
-      .then(r => r.json());
-    // обновляем только если поля ещё пустые (не трогаем ручные правки)
-    if (!rateUSDCNY.value) rateUSDCNY.value = rates.CNY.toFixed(2);
-    if (!rateUSDKRW.value) rateUSDKRW.value = rates.KRW.toFixed(0);
-    if (!rateUSDEUR.value) rateUSDEUR.value = rates.EUR.toFixed(3);
-  } catch (e) {
-    console.warn('Курсы не подгрузились', e);
-  }
-}
-
-// вызываем после полной загрузки DOM
-window.addEventListener('DOMContentLoaded', loadRates);

@@ -223,25 +223,3 @@ clientPriceInput.addEventListener('input', () => {
   const margin = clientPrice - totalNoMarginRaw;
   outMargin.textContent = fmt(margin);
 });
-/* ---------- персистентные курсы (без сброса) ---------- */
-const RATE_KEYS = {
-  USDCNY: 'rateUSDCNY',
-  USDKRW: 'rateUSDKRW',
-  USDEUR: 'rateUSDEUR'
-};
-
-// 1. При загрузке достаём сохранённые или ставим дефолт
-Object.entries(RATE_KEYS).forEach(([code, key]) => {
-  const el = document.getElementById(code.toLowerCase());
-  el.value = localStorage.getItem(key) ?? (
-    code === 'USDCNY' ? 7.27 :
-    code === 'USDKRW' ? 1975 : 0.852
-  );
-});
-
-// 2. Сохраняем при любом изменении
-["rateUSDCNY", "rateUSDKRW", "rateUSDEUR"].forEach(id => {
-  document.getElementById(id).addEventListener("input", e => {
-    localStorage.setItem(id, e.target.value);
-  });
-});

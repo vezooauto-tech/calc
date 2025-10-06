@@ -127,7 +127,7 @@ btnCalc.addEventListener("click", () => {
   const dutyUSD = dutyEUR / rateEUR;
 
   const totalNoMargin = priceUSD + dutyUSD + deliveryVal;
-  const commission = (priceUSD + deliveryVal) * 0.012;
+  const commission = totalNoMargin * 0.012;
   const utilFee = ageYears <= 3 ? 175 : 300;
   const customs = 40;
   const svh = 200;

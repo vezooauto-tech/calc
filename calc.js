@@ -161,39 +161,6 @@ btnClear.addEventListener("click", () => {
   outDate.textContent = "—";
   document.querySelectorAll("#results div[id^='out']").forEach(el => el.textContent = "0.00 $");
 });
-
-// --- Отправка через serverless function ---
-btnSend.addEventListener("click", async () => {
-  const data = {
-    date: outDate.textContent,
-    brandModel: brandModel.value || "",
-    engineType: engineTypeSelect.options[engineTypeSelect.selectedIndex].text,
-    volume: volumeInput.value || "",
-    benefit: benefitCheckbox.checked ? "Да" : "Нет",
-    delivery: deliveryInput.value || "",
-    priceAuto: outPriceUSD.textContent.replace(/[^0-9.]/g, ""),
-    totalAutoDeliveryDuty: outTotalNoMargin.textContent.replace(/[^0-9.]/g, ""),
-    clientPrice: clientPriceInput.value || "",
-    margin: outMargin.textContent.replace(/[^0-9.]/g, ""),
-    fullCost: outFullUSD.textContent.replace(/[^0-9.]/g, ""),
-    link: linkInput.value || "",
-    country: currentCountry
-  };
-
-  try {
-    const response = await fetch("/api/submit", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: { "Content-Type": "application/json" },
-    });
-
-    alert("✅ Данные успешно отправлены в таблицу!");
-  } catch (err) {
-    console.error(err);
-    alert("❌ Ошибка при отправке данных!");
-  }
-});
-
 // --- Инициализация ---
 setCountry("china");
 // === Плавный скролл к результатам ТОЛЬКО после клика на "Рассчитать" ===

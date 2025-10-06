@@ -166,14 +166,22 @@ btnSend.addEventListener("click", async () => {
   const token  = '7711504618:AAFIMzbrwJfV4If7os9bT671uuV1O-s25mg';
   const chatId = '-1002840988847';
 
-  // Формируем красивое сообщение
+  // Удобные текстовки
+  const engineText = engineTypeSelect.options[engineTypeSelect.selectedIndex].text;
+  const benefitTxt = benefitCheckbox.checked ? "Да" : "Нет";
+
   const text = `
 📊 <b>Новый расчёт ${currentCountry.toUpperCase()}</b>
 ├ Марка / модель:  <b>${brandModel.value || "—"}</b>
-├ Цена клиента:    <b>${outFullUSD.textContent}</b>
-├ Маржа:           <b>${outMargin.textContent}</b>
+├ Год выпуска:     <b>${yearInput.value || "—"}</b>
+├ Тип двигателя:   <b>${engineText}</b>
 ├ Пробег:          <i>${mileageInput.value || "—"} км</i>
-└ Ссылка: ${linkInput.value || "—"}
+├ Льгота №140:     <b>${benefitTxt}</b>
+├ Стоимость итого: <b>${outTotalNoMargin.textContent}</b>
+├ Цена клиенту:    <b>${clientPriceInput.value ? fmt(parseFloat(clientPriceInput.value)) : "—"}</b>
+├ Прогноз цена:    <b>${outFullUSD.textContent}</b>
+├ Комментарий:     <i>${commentInput.value || "—"}</i>
+└ Ссылка: ${linkInput.value ? `<a href="${linkInput.value}">открыть объявление</a>` : "—"}
   `.trim();
 
   try {

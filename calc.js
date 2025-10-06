@@ -245,3 +245,27 @@ clientPriceInput.addEventListener('input', () => {
   const margin = clientPrice - totalNoMarginRaw;
   outMargin.textContent = fmt(margin);
 });
+// ➜  курсы сохраняются ТОЛЬКО после полной загрузки DOM
+window.addEventListener('DOMContentLoaded', () => {
+  const RATE_KEYS = {
+    USDCNY: 'rateUSDCNY',
+    USDKRW: 'rateUSDKRW',
+    USDEUR: 'rateUSDEUR'
+  };
+
+  // читаем или ставим дефолт
+  Object.entries(RATE_KEYS).forEach(([code, key]) => {
+    const el = document.getElementById(code.toLowerCase());
+    if (el) el.value = localStorage.getItem(key) ?? (
+      code === 'USDCNY' ? 7.27 :
+      code === 'USDKRW' ? 1975 : 0.852
+    );
+  });
+
+  // сохраняем при изменении
+  ["rateUSDCNY", "rateUSDKRW", "rateUSDEUR"].forEach(id => {
+    document.getElementById(id)?.addEventListener("input", e => {
+      localStorage.setItem(id, e.target.value);
+    });
+  });
+});

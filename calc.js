@@ -208,28 +208,6 @@ btnSend.addEventListener("click", async () => {
 });
 // --- Инициализация ---
 setCountry("china");
-/* ---------- персистентные курсы (без сброса) ---------- */
-const RATE_KEYS = {
-  USDCNY: 'rateUSDCNY',
-  USDKRW: 'rateUSDKRW',
-  USDEUR: 'rateUSDEUR'
-};
-
-// 1. При загрузке достаём сохранённые или ставим дефолт
-Object.entries(RATE_KEYS).forEach(([code, key]) => {
-  const el = document.getElementById(code.toLowerCase());
-  el.value = localStorage.getItem(key) ?? (
-    code === 'USDCNY' ? 7.27 :
-    code === 'USDKRW' ? 1975 : 0.852
-  );
-});
-
-// 2. Сохраняем при любом изменении
-["rateUSDCNY", "rateUSDKRW", "rateUSDEUR"].forEach(id => {
-  document.getElementById(id).addEventListener("input", e => {
-    localStorage.setItem(id, e.target.value);
-  });
-});
 // === Плавный скролл к результатам ТОЛЬКО после клика на "Рассчитать" ===
 btnCalc.addEventListener('click', () => {
   // ждём 100 мс, чтобы браузер успел отрисовать новые данные
@@ -245,26 +223,22 @@ clientPriceInput.addEventListener('input', () => {
   const margin = clientPrice - totalNoMarginRaw;
   outMargin.textContent = fmt(margin);
 });
-// ➜  курсы сохраняются ТОЛЬКО после полной загрузки DOM
+// ========== сохранение курсов в localStorage ==========
 window.addEventListener('DOMContentLoaded', () => {
-  const RATE_KEYS = {
-    USDCNY: 'rateUSDCNY',
-    USDKRW: 'rateUSDKRW',
-    USDEUR: 'rateUSDEUR'
-  };
+  const fields = ['rateUSDCNY', 'rateUSDKRW', 'rateUSDEUR'];
+  const defaults = { USDCNY: 7.27, USDKRW: 1975, USDEUR: 0.852 };
 
-  // читаем или ставим дефолт
-  Object.entries(RATE_KEYS).forEach(([code, key]) => {
-    const el = document.getElementById(code.toLowerCase());
-    if (el) el.value = localStorage.getItem(key) ?? (
-      code === 'USDCNY' ? 7.27 :
-      code === 'USDKRW' ? 1975 : 0.852
-    );
+  // 1. восстанавливаем сохранённые или ставим дефолт
+  fields.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const saved = localStorage.getItem(id);
+    el.value = saved ?? defaults[id.replace('rate', '')];
   });
 
-  // сохраняем при изменении
-  ["rateUSDCNY", "rateUSDKRW", "rateUSDEUR"].forEach(id => {
-    document.getElementById(id)?.addEventListener("input", e => {
+  // 2. сохраняем при изменении
+  fields.forEach(id => {
+    document.getElementById(id)?.addEventListener('input', e => {
       localStorage.setItem(id, e.target.value);
     });
   });

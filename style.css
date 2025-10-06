@@ -1,149 +1,81 @@
-/* ---------- 1. Сброс и база ---------- */
-*, *::before, *::after { box-sizing: border-box; }
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background: #f4f6fa;
-  color: #222;
-  line-height: 1.4;
+/* ---------- 0. Переменные (удобно тюнить) ---------- */
+:root{
+  --gap: 24px;          /* основной промежуток между блоками */
+  --radius: 10px;       /* скругление карточек */
+  --card-pad: 28px 32px 32px;
+  --blue: #3b82f6;
 }
 
-/* ---------- 2. Контейнер и карточки ---------- */
-.container {
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 0 24px 40px;
-}
-
+/* ---------- 1. Карточки и их внутренние отступы ---------- */
 header.top,
 .country-switch,
 .form,
-.results {
-  background: #fff;
-  border-radius: 12px;
-  padding: 28px 32px 32px;
-  box-shadow: 0 4px 18px rgba(0,0,0,.05);
-  margin-bottom: 24px;
+.results{
+  padding: var(--card-pad);
+  border-radius: var(--radius);
+  margin-bottom: var(--gap);
 }
 
-/* ---------- 3. Типографика ---------- */
-h1 {
-  font-size: 26px;
-  font-weight: 600;
-  margin: 0 0 24px;
-  text-align: center;
-  letter-spacing: .5px;
+/* ---------- 2. Отступы между полями внутри формы ---------- */
+form .field:not(:last-child){          /* каждое поле кроме последнего */
+  margin-bottom: 18px;
 }
-h3 {
-  font-size: 17px;
-  font-weight: 600;
-  margin: 0 0 16px;
+.two-cols .field{                      /* в двух-колонках тоже */
+  margin-bottom: 18px;
 }
 
-/* ---------- 4. Поля ввода ---------- */
-.field input,
-.field select {
-  width: 100%;
-  padding: 10px 14px;
-  font-size: 15px;
-  border: 1px solid #d0d7e3;
-  border-radius: 8px;
-  background: #fff;
-  transition: border-color .2s, box-shadow .2s;
-}
-.field input:focus,
-.field select:focus {
-  outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59,130,246,.15);
-}
-.field label {
-  font-size: 14px;
-  margin-bottom: 6px;
-  color: #444;
-}
-
-/* ---------- 5. Кнопки ---------- */
-button {
-  cursor: pointer;
-  font-size: 15px;
-  font-weight: 500;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  transition: background .25s, transform .1s;
-}
-button:active { transform: translateY(1px); }
-
-.primary {
-  background: #3b82f6;
-  color: #fff;
-}
-.primary:hover { background: #2563eb; }
-
-.muted {
-  background: #e5e9f0;
-  color: #333;
-}
-.muted:hover { background: #d0d7e3; }
-
-.country {
-  background: #fff;
-  color: #3b82f6;
-  border: 1px solid #dbeafe;
-}
-.country.active,
-.country:hover {
-  background: #3b82f6;
-  color: #fff;
-  border-color: #3b82f6;
-}
-
-/* ---------- 6. Сетки и отступы ---------- */
-.two-cols { display: flex; gap: 20px; }
-.two-cols .field { flex: 1; }
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 18px;
-}
-
-.small-outputs {
+/* ---------- 3. Кнопки «Рассчитать / Сбросить» отделяем от полей ---------- */
+.actions{
+  margin-top: 32px;        /* от последнего поля до кнопок */
   display: flex;
-  gap: 20px;
-}
-.small-outputs > div { flex: 1; }
-
-/* ---------- 7. Прочее ---------- */
-.small {
-  font-size: 12px;
-  color: #6b7280;
-  margin-top: 4px;
-}
-.big {
-  font-size: 22px;
-  font-weight: 600;
-  color: #111;
+  gap: 16px;
 }
 
-.checkbox {
-  flex-direction: row;
-  align-items: center;
-}
-.checkbox input { width: auto; margin-right: 8px; }
+/* ---------- 4. Результаты – внутренние отступы между секциями ---------- */
+.results .grid               { margin-bottom: 28px; }
+.client-price                { margin: 32px 0; }
+.forecast                    { margin-top: 32px; }
 
-.send-row {
+/* ---------- 5. Поле «Цена для клиента» – делаем шире ---------- */
+#clientPrice{
+  width: 100%;               /* занимает всю ширину родителя */
+  max-width: 320px;          /* но не разъезжается дальше */
+  padding: 12px 14px;
+  font-size: 16px;
+}
+
+/* ---------- 6. Мелкие блоки «Маржа / Комиссия» – отделяем друг от друга ---------- */
+.small-outputs{
+  display: flex;
+  gap: 24px;                 /* было 15 → стало 24 */
+  margin-top: 12px;
+}
+.small-outputs > div{
+  flex: 1;                   /* растягиваем поровну */
+  background: #f8fafc;       /* чуть цветом отделяем */
+  padding: 12px 14px;
+  border-radius: 8px;
+}
+
+/* ---------- 7. Финальный тотал – ещё выше отступ ---------- */
+.final-total{
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid #e5e9f0;
+}
+
+/* ---------- 8. Кнопка «Отправить» – тоже отдельным блоком ---------- */
+.send-row{
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #e5e9f0;
   display: flex;
   align-items: center;
   gap: 16px;
-  margin-top: 24px;
 }
 
-/* ---------- 8. Адаптив ---------- */
-@media (max-width: 640px) {
-  .two-cols,
-  .small-outputs {
-    flex-direction: column;
-  }
+/* ---------- 9. Адаптив – на узких экранах всё в столбик ---------- */
+@media (max-width: 640px){
+  .two-cols, .small-outputs{ flex-direction: column; }
+  .actions{ flex-direction: column; }
 }

@@ -1,0 +1,175 @@
+/* === Общие стили === */
+body {
+  font-family: Arial, sans-serif;
+  background: #f7f7f7;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* === Заголовок === */
+header.top h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.rates-inline {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.rates-inline .rate {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* === Кнопки выбора страны === */
+.country-switch {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.country {
+  padding: 10px 20px;
+  border: 1px solid #007bff;
+  background-color: white;
+  color: #007bff;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.country.active,
+.country:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+/* === Форма === */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.field input,
+.field select {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.checkbox {
+  flex-direction: row;
+  align-items: center;
+}
+
+.checkbox label {
+  margin-left: 10px;
+}
+
+.two-cols {
+  display: flex;
+  gap: 15px;
+}
+
+.two-cols .field {
+  flex: 1;
+}
+
+/* === Кнопки === */
+button.primary {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+button.primary:hover {
+  background-color: #0056b3;
+}
+
+button.muted {
+  background-color: #ddd;
+  color: #333;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button.muted:hover {
+  background-color: #bbb;
+}
+
+/* === Результаты === */
+.results {
+  margin-top: 30px;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.client-price,
+.forecast {
+  margin-top: 20px;
+}
+
+.send-row {
+  margin-top: 20px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* === Мелкие подписи === */
+.small {
+  font-size: 12px;
+  color: #666;
+}
+
+.big {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* === Прогнозируемые расходы === */
+.small-outputs {
+  display: flex;
+  gap: 15px;
+}
+
+.small-outputs > div {
+  flex: 1;
+}

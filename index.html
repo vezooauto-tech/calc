@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Внутренний калькулятор авто</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="top">
+      <h1>Внутренний калькулятор авто</h1>
+
+      <div class="rates-inline">
+        <div class="rate">
+          <label for="rateUSDCNY">USD / CNY</label>
+          <input id="rateUSDCNY" type="number" step="0.01" value="7.27" />
+        </div>
+        <div class="rate">
+          <label for="rateUSDKRW">USD / KRW</label>
+          <input id="rateUSDKRW" type="number" step="1" value="1975" />
+        </div>
+        <div class="rate">
+          <label for="rateUSDEUR">USD / EUR</label>
+          <input id="rateUSDEUR" type="number" step="0.001" value="0.852" />
+        </div>
+      </div>
+    </header>
+
+    <div class="country-switch">
+      <button id="btnChina" class="country active" data-country="china">Китай</button>
+      <button id="btnKorea" class="country" data-country="korea">Корея</button>
+    </div>
+
+    <form id="calcForm" class="form" onsubmit="return false;">
+      <div class="field">
+        <label for="price">Стоимость авто (в юанях / вонах)</label>
+        <input id="price" name="price" type="number" placeholder="например, 100000" />
+        <div class="small" id="currencyLabel">юань</div>
+      </div>
+
+      <div class="two-cols">
+        <div class="field">
+          <label for="age">Возраст автомобиля</label>
+          <select id="age" name="age">
+            <option value="0-3">До 3 лет</option>
+            <option value="3-5">От 3 до 5 лет</option>
+            <option value=">5">Старше 5 лет</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="engineType">Тип двигателя</label>
+          <select id="engineType" name="engineType">
+            <option value="gasoline">Бензин</option>
+            <option value="diesel">Дизель</option>
+            <option value="electric">Электро</option>
+            <option value="hybrid">Гибрид</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="volume">Объём двигателя (см³)</label>
+        <input id="volume" name="volume" type="number" placeholder="например, 1600" />
+      </div>
+
+      <div class="field checkbox">
+        <input id="benefit140" type="checkbox" />
+        <label for="benefit140">Применить льготу по указу №140 (половина пошлины)</label>
+      </div>
+
+      <div class="field">
+        <label for="delivery">Стоимость доставки ($)</label>
+        <input id="delivery" name="delivery" type="number" />
+        <div class="small">По умолчанию: Китай — 4460 $, Корея — 4370 $ (можно изменить)</div>
+      </div>
+
+      <section class="optional">
+        <h3>Дополнительно (необязательно)</h3>
+
+        <div class="field">
+          <label for="brandModel">Марка / модель</label>
+          <input id="brandModel" type="text" placeholder="например, Toyota Corolla" />
+        </div>
+
+        <div class="two-cols">
+          <div class="field">
+            <label for="year">Год выпуска</label>
+            <input id="year" type="number" />
+          </div>
+          <div class="field">
+            <label for="mileage">Пробег (км)</label>
+            <input id="mileage" type="number" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="link">Ссылка на объявление</label>
+          <input id="link" type="url" placeholder="https://..." />
+        </div>
+
+        <div class="field">
+          <label for="comment">Комментарий</label>
+          <input id="comment" type="text" />
+        </div>
+      </section>
+
+      <div class="actions">
+        <button id="btnCalc" class="primary" type="button">Рассчитать</button>
+        <button id="btnClear" type="button" class="muted">Сбросить</button>
+      </div>
+    </form>
+
+    <div id="results" class="results">
+      <h2>Результаты расчёта</h2>
+
+      <div class="grid">
+        <div>
+          <label>Дата / время</label>
+          <div id="outDate">—</div>
+        </div>
+
+        <div>
+          <label>Стоимость авто (USD)</label>
+          <div id="outPriceUSD">0.00 $</div>
+        </div>
+
+        <div>
+          <label>Стоимость авто (EUR)</label>
+          <div id="outPriceEUR">0.00 €</div>
+        </div>
+
+        <div>
+          <label>Пошлина (USD)</label>
+          <div id="outDutyUSD">0.00 $</div>
+        </div>
+
+        <div>
+          <label>Пошлина (EUR)</label>
+          <div id="outDutyEUR">0.00 €</div>
+        </div>
+
+        <div>
+          <label>Доставка (USD)</label>
+          <div id="outDeliveryUSD">0.00 $</div>
+        </div>
+
+        <div>
+          <label><strong>Авто + доставка + пошлина (USD)</strong></label>
+          <div id="outTotalNoMargin">0.00 $</div>
+        </div>
+      </div>
+
+      <div class="client-price">
+        <label for="clientPrice">Цена для клиента ($)</label>
+        <input id="clientPrice" type="number" placeholder="введите цену для клиента" />
+
+        <div class="two-cols small-outputs">
+          <div>
+            <label>Маржа ($)</label>
+            <div id="outMargin">0.00 $</div>
+          </div>
+
+          <div>
+            <label>Комиссия за перевод (1.2%)</label>
+            <div id="outCommission">0.00 $</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="forecast">
+        <h3>Прогнозируемые расходы</h3>
+
+        <div class="two-cols small-outputs">
+          <div>
+            <label>Утилизационный сбор (≈)</label>
+            <div id="outUtilUSD">0.00 $</div>
+          </div>
+
+          <div>
+            <label>Таможенный сбор</label>
+            <div id="outCustomsUSD">40.00 $</div>
+          </div>
+
+          <div>
+            <label>СВХ</label>
+            <div id="outSVHUSD">200.00 $</div>
+          </div>
+
+          <div>
+            <label>Брокер</label>
+            <div id="outBrokerUSD">300.00 $</div>
+          </div>
+        </div>
+
+        <div class="final-total">
+          <label>Прогнозируемая цена со всеми расходами</label>
+          <div id="outFullUSD" class="big">0.00 $</div>
+        </div>
+      </div>
+
+      <div class="send-row">
+        <button id="btnSend" class="primary" type="button">Отправить в таблицу</button>
+        <div class="send-note small">Данные уйдут в Google Sheets (Китай / Корея по выбранной стране)</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="calc.js"></script>
+</body>
+</html>

@@ -1,175 +1,149 @@
-/* === Общие стили === */
+/* ---------- 1. Сброс и база ---------- */
+*, *::before, *::after { box-sizing: border-box; }
 body {
-  font-family: Arial, sans-serif;
-  background: #f7f7f7;
   margin: 0;
-  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: #f4f6fa;
+  color: #222;
+  line-height: 1.4;
 }
 
+/* ---------- 2. Контейнер и карточки ---------- */
 .container {
   max-width: 900px;
-  margin: 0 auto;
-  padding: 20px;
+  margin: 40px auto;
+  padding: 0 24px 40px;
 }
 
-/* === Заголовок === */
-header.top h1 {
+header.top,
+.country-switch,
+.form,
+.results {
+  background: #fff;
+  border-radius: 12px;
+  padding: 28px 32px 32px;
+  box-shadow: 0 4px 18px rgba(0,0,0,.05);
+  margin-bottom: 24px;
+}
+
+/* ---------- 3. Типографика ---------- */
+h1 {
+  font-size: 26px;
+  font-weight: 600;
+  margin: 0 0 24px;
   text-align: center;
-  margin-bottom: 20px;
+  letter-spacing: .5px;
+}
+h3 {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 0 0 16px;
 }
 
-.rates-inline {
-  display: flex;
-  gap: 15px;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.rates-inline .rate {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-/* === Кнопки выбора страны === */
-.country-switch {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.country {
-  padding: 10px 20px;
-  border: 1px solid #007bff;
-  background-color: white;
-  color: #007bff;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.country.active,
-.country:hover {
-  background-color: #007bff;
-  color: white;
-}
-
-/* === Форма === */
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.field {
-  display: flex;
-  flex-direction: column;
-}
-
+/* ---------- 4. Поля ввода ---------- */
 .field input,
 .field select {
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
   width: 100%;
-  box-sizing: border-box;
+  padding: 10px 14px;
+  font-size: 15px;
+  border: 1px solid #d0d7e3;
+  border-radius: 8px;
+  background: #fff;
+  transition: border-color .2s, box-shadow .2s;
+}
+.field input:focus,
+.field select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59,130,246,.15);
+}
+.field label {
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: #444;
+}
+
+/* ---------- 5. Кнопки ---------- */
+button {
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  transition: background .25s, transform .1s;
+}
+button:active { transform: translateY(1px); }
+
+.primary {
+  background: #3b82f6;
+  color: #fff;
+}
+.primary:hover { background: #2563eb; }
+
+.muted {
+  background: #e5e9f0;
+  color: #333;
+}
+.muted:hover { background: #d0d7e3; }
+
+.country {
+  background: #fff;
+  color: #3b82f6;
+  border: 1px solid #dbeafe;
+}
+.country.active,
+.country:hover {
+  background: #3b82f6;
+  color: #fff;
+  border-color: #3b82f6;
+}
+
+/* ---------- 6. Сетки и отступы ---------- */
+.two-cols { display: flex; gap: 20px; }
+.two-cols .field { flex: 1; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.small-outputs {
+  display: flex;
+  gap: 20px;
+}
+.small-outputs > div { flex: 1; }
+
+/* ---------- 7. Прочее ---------- */
+.small {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 4px;
+}
+.big {
+  font-size: 22px;
+  font-weight: 600;
+  color: #111;
 }
 
 .checkbox {
   flex-direction: row;
   align-items: center;
 }
-
-.checkbox label {
-  margin-left: 10px;
-}
-
-.two-cols {
-  display: flex;
-  gap: 15px;
-}
-
-.two-cols .field {
-  flex: 1;
-}
-
-/* === Кнопки === */
-button.primary {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: 0.3s;
-}
-
-button.primary:hover {
-  background-color: #0056b3;
-}
-
-button.muted {
-  background-color: #ddd;
-  color: #333;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button.muted:hover {
-  background-color: #bbb;
-}
-
-/* === Результаты === */
-.results {
-  margin-top: 30px;
-  padding: 20px;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 15px;
-  margin-bottom: 20px;
-}
-
-.client-price,
-.forecast {
-  margin-top: 20px;
-}
+.checkbox input { width: auto; margin-right: 8px; }
 
 .send-row {
-  margin-top: 20px;
   display: flex;
-  gap: 15px;
   align-items: center;
-  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 24px;
 }
 
-/* === Мелкие подписи === */
-.small {
-  font-size: 12px;
-  color: #666;
-}
-
-.big {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-/* === Прогнозируемые расходы === */
-.small-outputs {
-  display: flex;
-  gap: 15px;
-}
-
-.small-outputs > div {
-  flex: 1;
+/* ---------- 8. Адаптив ---------- */
+@media (max-width: 640px) {
+  .two-cols,
+  .small-outputs {
+    flex-direction: column;
+  }
 }

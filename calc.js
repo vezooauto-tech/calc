@@ -196,3 +196,5 @@ btnSend.addEventListener("click", async () => {
 
 // --- Инициализация ---
 setCountry("china");
+// после показа результатов плавно прокручиваем к блоку
+document.getElementById('results').scrollIntoView({behavior:'smooth', block:'start'});

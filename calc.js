@@ -177,6 +177,7 @@ btnSend.addEventListener("click", async () => {
   const customs   = parseFloat(outCustomsUSD.textContent.replace(/[^0-9.]/g, "")) || 0;
   const svh       = parseFloat(outSVHUSD.textContent.replace(/[^0-9.]/g, "")) || 0;
   const broker    = parseFloat(outBrokerUSD.textContent.replace(/[^0-9.]/g, "")) || 0;
+  const commission= parseFloat(outCommission.textContent.replace(/[^0-9.]/g, "")) || 0;
 
   const text = `
 📊 <b>Новый расчёт ${currentCountry.toUpperCase()}</b>
@@ -191,13 +192,14 @@ btnSend.addEventListener("click", async () => {
 ├ Стоимость итого: <b>${outTotalNoMargin.textContent}</b>
 ├ Цена клиенту:    <b>${clientPriceInput.value ? fmt(parseFloat(clientPriceInput.value)) : "—"}</b>
 ├ Прогноз цена:    <b>${outFullUSD.textContent}</b>
+├ Комиссия 1,2%:   <b>${fmt(commission)}</b>
 ├ Утилизационный:  <b>${fmt(util)}</b>
 ├ Таможенный:      <b>${fmt(customs)}</b>
 ├ СВХ:             <b>${fmt(svh)}</b>
 ├ Брокер:          <b>${fmt(broker)}</b>
 └ Ссылка: ${linkInput.value ? `<a href="${linkInput.value}">открыть объявление</a>` : "—"}
 
-🕘 <b>Дата объявки:</b> <i>${outDate.textContent}</i>
+🕘 <b>Дата просчета:</b> <i>${outDate.textContent}</i>
 💬 <b>Комментарий:</b> <i>${commentInput.value || "—"}</i>
   `.trim();
 

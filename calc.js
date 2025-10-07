@@ -184,6 +184,7 @@ btnSend.addEventListener("click", async () => {
 ├ Марка / модель:  <b>${brandModel.value || "—"}</b>
 ├ Год выпуска:     <b>${yearInput.value || "—"}</b>
 ├ Тип двигателя:   <b>${engineText}</b>
+├ Объём:           <b>${volumeInput.value || "—"} см³</b>
 ├ Пробег:          <i>${mileageInput.value || "—"} км</i>
 ├ Льгота №140:     <b>${benefitTxt}</b>
 ├ Стоимость авто:  <b>${fmt(priceUSD)}</b>

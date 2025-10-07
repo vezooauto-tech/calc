@@ -188,7 +188,7 @@ btnSend.addEventListener("click", async () => {
 ├ Стоимость итого: <b>${outTotalNoMargin.textContent}</b>
 ├ Цена клиенту:    <b>${clientPriceInput.value ? fmt(parseFloat(clientPriceInput.value)) : "—"}</b>
 ├ Прогноз цена:    <b>${outFullUSD.textContent}</b>
-├ Дата объявки:    <i>${adDate}</i>
+├ Дата:    <i>${adDate}</i>
 ├ Комментарий:     <i>${commentInput.value || "—"}</i>
 └ Ссылка: ${linkInput.value ? `<a href="${linkInput.value}">открыть объявление</a>` : "—"}
   `.trim();

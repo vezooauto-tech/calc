@@ -201,6 +201,8 @@ btnSend.addEventListener("click", async () => {
 ├ Брокер:          <b>${fmt(broker)}</b>
 └ Ссылка: ${linkInput.value ? `<a href="${linkInput.value}">открыть объявление</a>` : "—"}
 
+<b>Тикет:</b> <i>(впишите вручную)</i>
+
 🕘 <b>Дата просчета:</b> <i>${outDate.textContent}</i>
 💬 <b>Комментарий:</b> <i>${commentInput.value || "—"}</i>
   `.trim();

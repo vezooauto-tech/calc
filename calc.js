@@ -192,6 +192,7 @@ btnSend.addEventListener("click", async () => {
 ├ Пошлина:         <b>${fmt(dutyUSD)}</b>
 ├ Стоимость итого: <b>${outTotalNoMargin.textContent}</b>
 ├ Цена клиенту:    <b>${clientPriceInput.value ? fmt(parseFloat(clientPriceInput.value)) : "—"}</b>
+├ Маржа:           <b>${outMargin.textContent}</b>
 ├ Прогноз цена:    <b>${outFullUSD.textContent}</b>
 ├ Комиссия 1,2%:   <b>${fmt(commission)}</b>
 ├ Утилизационный:  <b>${fmt(util)}</b>

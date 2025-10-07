@@ -173,7 +173,10 @@ btnSend.addEventListener("click", async () => {
   const dutyUSD   = parseFloat(outDutyUSD.textContent.replace(/[^0-9.]/g, "")) || 0;
   const priceUSD  = parseFloat(outPriceUSD.textContent.replace(/[^0-9.]/g, "")) || 0;
   const delivery  = parseFloat(deliveryInput.value) || 0;
-  const adDate    = outDate.textContent;
+  const util      = parseFloat(outUtilUSD.textContent.replace(/[^0-9.]/g, "")) || 0;
+  const customs   = parseFloat(outCustomsUSD.textContent.replace(/[^0-9.]/g, "")) || 0;
+  const svh       = parseFloat(outSVHUSD.textContent.replace(/[^0-9.]/g, "")) || 0;
+  const broker    = parseFloat(outBrokerUSD.textContent.replace(/[^0-9.]/g, "")) || 0;
 
   const text = `
 📊 <b>Новый расчёт ${currentCountry.toUpperCase()}</b>
@@ -188,9 +191,14 @@ btnSend.addEventListener("click", async () => {
 ├ Стоимость итого: <b>${outTotalNoMargin.textContent}</b>
 ├ Цена клиенту:    <b>${clientPriceInput.value ? fmt(parseFloat(clientPriceInput.value)) : "—"}</b>
 ├ Прогноз цена:    <b>${outFullUSD.textContent}</b>
-├ Дата:    <i>${adDate}</i>
-├ Комментарий:     <i>${commentInput.value || "—"}</i>
+├ Утилизационный:  <b>${fmt(util)}</b>
+├ Таможенный:      <b>${fmt(customs)}</b>
+├ СВХ:             <b>${fmt(svh)}</b>
+├ Брокер:          <b>${fmt(broker)}</b>
 └ Ссылка: ${linkInput.value ? `<a href="${linkInput.value}">открыть объявление</a>` : "—"}
+
+🕘 <b>Дата объявки:</b> <i>${outDate.textContent}</i>
+💬 <b>Комментарий:</b> <i>${commentInput.value || "—"}</i>
   `.trim();
 
   try {

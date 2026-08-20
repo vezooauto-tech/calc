@@ -55,7 +55,7 @@ function setCountry(country) {
   btnChina.classList.toggle("active", country === "china");
   btnKorea.classList.toggle("active", country === "korea");
   currencyLabel.textContent = country === "china" ? "юань" : "вон";
-  deliveryInput.value = country === "china" ? 4460 : 4370;
+  deliveryInput.value = country === "china" ? 4460 : 5500;
 }
 
 // --- Точная формула расчёта пошлины ---
